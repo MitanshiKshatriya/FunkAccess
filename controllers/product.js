@@ -186,6 +186,21 @@ exports.getAllProduct = (req,res) => {
 	})
 }
 
+// get all unique category
+exports.getAllUniqueCategory = (req,res) => {
+	Product.distinct("category", {},
+		(err,categories)=>{
+			if(err){
+				res.status(400).json({
+					err: "no category found"
+				})
+			}
+			res.json(categories)
+		}
+		)
+}
+
+
 //middleware handle purchases
 //update stock(-qty) && sold(+qty)
 exports.updateStockAndInventory = (req,res,next) => {
@@ -204,7 +219,6 @@ exports.updateStockAndInventory = (req,res,next) => {
 		}
 	})
 
-
 	Product.bulkWrite(myOperations,{}, 
 		(err,products)=>{
 			if(err){
@@ -216,5 +230,5 @@ exports.updateStockAndInventory = (req,res,next) => {
 			next()
 
 		})
-
 }
+
