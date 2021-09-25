@@ -19,7 +19,10 @@ router.param("categoryId",getCategoryById)
 
 //create
 router.post("/category/create/:userId",
-	// isSignedIn, isAuthenticated, isAdmin,
+	isSignedIn, isAuthenticated, isAdmin,
+	[
+	check("name").notEmpty().withMessage("Name cannot be empty")
+	],
  	createCategory)
 
 //read

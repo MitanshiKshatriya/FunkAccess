@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 const authRoutes = require("./routes/auth")
 const userRoutes = require("./routes/user")
 const categoryRoutes = require("./routes/category")
+const productRoutes = require("./routes/product")
 
 //connections
 mongoose.connect(process.env.DATABASE,
@@ -28,6 +29,7 @@ app.use(cookieParser())
 app.use("/api",authRoutes)
 app.use("/api",userRoutes)
 app.use("/api",categoryRoutes)
+app.use("/api",productRoutes)
 
 app.get('/',(req,res)=>res.send('Hello World'))
 
