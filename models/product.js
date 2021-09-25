@@ -37,6 +37,10 @@ const productSchema = new mongoose.Schema({
 		data: Buffer,
 		contentType: String
 	},
+	urlPhoto:{
+		type:String,
+		required:true
+	},
 	size:{
 		type: String
 	}

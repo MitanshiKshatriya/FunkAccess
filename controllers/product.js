@@ -1,5 +1,9 @@
 const Product = require('../models/product')
+const formidable = require("formidable")
+const _ = require("lodash")
+const fs = require("fs")
 
+//params get product by id
 exports.getProductById = (req,res,next,id) => {
 	Product.findById(id)
 	.exec((err,product)=>{
@@ -11,4 +15,206 @@ exports.getProductById = (req,res,next,id) => {
 		req.product = product
 		next()
 	})
+}
+
+//create product
+exports.createProduct = (req,res) => {
+	let form = new formidable.IncomingForm();
+	form.keepExtensions = true
+
+	form.parse(req, (err, fields, file) => {
+
+		if(err){
+			return res.status(400).json({
+				err: `problem with image: ${err}`
+			})
+		}
+
+		// Destructuring the fields
+		const { name,desc,price,category,
+			stock, urlPhoto } = fields
+
+		if(!name || !desc || !price || !category
+			|| !stock || !urlPhoto){
+			return res.status(400).json({
+				err: "Please include all fields"
+			})
+			}
+
+
+		//TODO: restrictions on field
+		let product = new Product(fields)
+
+		//hande]le file here
+		if(file.photo!=undefined){
+		if(file.photo.size > 3*1024*1024){
+			return res.status(400).json({
+				err: "File size is above 3mb"
+			})
+		}
+		product.photo.data = fs.readFileSync(
+			file.photo.path)
+
+		product.photo.contentType = file.photo.type
+		}
+
+		console.log(product)
+		//save to the db
+		product.save((err,product)=>{
+			if(err){
+				return res.status(400).json({
+					err: "Could not save product to DB"
+				})
+			}
+
+			res.json({
+				msg: "Prouct saved succssfully! "+product
+			})
+		})
+
+	})
+}
+
+//get product
+exports.getProduct = (req,res) => {
+	req.product.photo = undefined
+	return res.json(req.product)
+}
+
+//handling binary data loading middleware
+exports.photo = (req,res,next) => {
+	if(req.product.photo && req.product.photo.data){
+		res.set("Content-Type",req.product.contentType)
+		return res.send(req.product.contentType)
+	}
+	next()
+}
+
+//delete product
+exports.removeProduct = (req,res) => {
+	let product = req.product
+	product.remove((err,deletedProduct)=>{
+		if(err){
+			return res.status(400).json({
+				err: "Failed to delted product"
+			})
+		}
+		res.json({
+			msg: "Product delted succssfully",
+			deletedProduct
+		})
+	})
+}
+
+//update product
+exports.updateProduct = (req,res) => {
+	let form = new formidable.IncomingForm();
+	form.keepExtensions = true
+
+	form.parse(req, (err, fields, file) => {
+
+		if(err){
+			return res.status(400).json({
+				err: `problem with image: ${err}`
+			})
+		}
+
+
+
+		//TODO: restrictions on field
+		let product = req.product
+		// updates field in products from
+		// fields
+		product = _.extend(product, fields)
+
+		//handele file here
+		if(file.photo!=undefined){
+		if(file.photo.size > 3*1024*1024){
+			return res.status(400).json({
+				err: "File size is above 3mb"
+			})
+		}
+		product.photo.data = fs.readFileSync(
+			file.photo.path)
+
+		product.photo.contentType = file.photo.type
+		}
+
+		console.log(product)
+		//save to the db
+		product.save((err,product)=>{
+			if(err){
+				return res.status(400).json({
+					err: "Update product to DB failed"
+				})
+			}
+
+			res.json({
+				msg: "Prouct updated succssfully! "+product
+			})
+		})
+
+	})
+}
+
+//get all product
+exports.getAllProduct = (req,res) => {
+	let limit = req.query.limit ? 
+	parseInt(req.query.limit) : 8
+
+	let sortBy = req.query.sortBy ? 
+	req.query.sortBy : "_id"
+
+	let orderBy = req.query.orderBy ?
+	req.query.orderBy : "asc"
+
+	Product.find()
+	.select("-photo")
+	.limit(limit)
+	.sort([[sortBy, orderBy]])
+	.exec((err,products)=>{
+
+		if(err){
+			return res.status(400).json({
+				err: "No product found"
+			})
+		}
+
+
+		res.json(products)
+
+	})
+}
+
+//middleware handle purchases
+//update stock(-qty) && sold(+qty)
+exports.updateStockAndInventory = (req,res,next) => {
+	
+	let myOperations = req.body.order.products
+	.map(prod => {
+		return {
+			updateOne: {
+				filter: {_id: prod._id},
+				//prod.count coming from frontend
+				update: {$inc: 
+					{stock: -prod.count, 
+					sold: +prod.count}
+				}
+			}
+		}
+	})
+
+
+	Product.bulkWrite(myOperations,{}, 
+		(err,products)=>{
+			if(err){
+				res.status(400).json({
+					err: "Bulk Operation failed"
+				})
+			}
+
+			next()
+
+		})
+
 }
