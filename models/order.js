@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { ObjectId } = mongoose.Schema;
 
-const productCartSchema = new mongoose.Schema({
+const ProductCartSchema = new mongoose.Schema({
 	product:{
 		type: ObjectId,
 		ref: "Product"
@@ -10,12 +10,17 @@ const productCartSchema = new mongoose.Schema({
 	count: Number,
 	price: Number
 })
-const ProductCart = mongoose.model("ProductCart",productCartSchema)
+const ProductCart = mongoose.model("ProductCart",ProductCartSchema)
 
 const orderSchema = new mongoose.Schema({
-	products:[productCartSchema],
+	products:[ProductCartSchema],
 	amount:{type:Number},
 	address: String,
+	status: {
+		type: String,
+		default: "",
+		enum: ["Cancelled", "Delivered", "Shipped", "Processing", "Recieved"]
+	},
 	updated: Date,
 	user: {
 		type: ObjectId,

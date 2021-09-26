@@ -1,5 +1,6 @@
+const mongoose = require('mongoose')
 const User = require('../models/user')
-const Order = require('../models/Order')
+const { Order } = require('../models/order')
 
 const getUserById = (req,res,next,id) => {
 	User.findById(id)
@@ -115,5 +116,6 @@ module.exports = {
 	getUser, 
 	getAllUsers, 
 	updateUser, 
-	userPurchaseList 
+	userPurchaseList,
+	pushOrderInPurchaseList
 }
