@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Footer } from './Base'
+import Footer  from './Footer'
 import Navbar from './Navbar'
 import DisplaySection from './DisplaySection'
 import s1 from "../assets/s5.PNG"

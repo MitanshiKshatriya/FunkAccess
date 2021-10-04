@@ -1,36 +1,23 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
 import Navbar from './Navbar'
+import Footer from './Footer'
 
-export function Base({children}){
+const Base = ({children,className,footerClass,heading}) => {
     return(
-        <div>
+        <div className="container h-8 mx-auto p-4">
             <Navbar/>
+            <h1 className="uppercase text-4xl text-center font-bold my-4 font-domine">
+                {heading}
+            </h1>
+            <div className={className}>
             {children}
+            </div>
             <Footer/>
         </div>
     )
 }
 
+export default Base
 
-export function Footer(){
-    const styles = {
-        footerItem: "mx-2.5"
-    }
-    return(
-    <div className="border-t-2 border-grey-300 
-    md:flex md:flex-row md:justify-between
-    text-center
-     py-5 text-sm mt-auto">
-        <div className="mb-4">
-        <Link to="/" 
-        className={styles.footerItem}>Home</Link>
-        <Link to="/privacypolicy"
-        className={styles.footerItem}>Privacy Policy</Link>
-        <Link to="/terms"
-        className={styles.footerItem}>Terms Of Services</Link>
-        </div>
-        <p>&copy; Copyright Reserved 2021</p>
-    </div>
-    )
-}
+
+
