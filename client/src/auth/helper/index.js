@@ -1,6 +1,5 @@
 import {API} from '../../backend'
 import axios from 'axios'
-import { response } from 'express'
 
 const config = {
     headers: {
@@ -20,14 +19,17 @@ export const signup = async user => {
     
 }
 
-export const signout = async user => next => {
+export const signout = async next => {
     if(typeof window !== "undefined"){
         localStorage.removeItem("jwt")
         next();
 
-        return axios.get(`${API}/signout`)
-        .then(response=> console.log("signout success"))
-        .catch(err => console.log(err))
+        try {
+            const response = await axios.get(`${API}/signout`)
+            return console.log(response)
+        } catch (err) {
+            return console.log(err)
+        }
     }  
 }
 
