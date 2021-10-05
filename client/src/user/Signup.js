@@ -10,14 +10,13 @@ const Signup = () => {
 
     const [values, setValues] = useState({
         name: "",
-        lastname: "",
         email: "",
         password: "",
         err:"",
         success:false
     })
 
-    const {name, lastname, email, password, err, success} = values;
+    const {name, email, password, err, success} = values;
 
     const handleChange = name => event => {
         setValues({...values, err: false, [name]:event.target.value})
@@ -26,7 +25,7 @@ const Signup = () => {
     const onSubmit = event => {
         event.preventDefault();
         setValues({...values, err:false})
-        signup({name,lastname,email,password})
+        signup({name,email,password})
         .then(data=>{
           // console.log("data = "+JSON.stringify(data))
             if(data.err){
@@ -35,7 +34,6 @@ const Signup = () => {
             else{
                 setValues({
                     name: "",
-                    lastname: "",
                     password: "",
                     err:"",
                     success:true
