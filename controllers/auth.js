@@ -11,7 +11,7 @@ const signup = (req,res) => {
 
 	if(!validationErrors.isEmpty()){
 		return res.status(400).
-		json({errors:validationErrors.array()[0].msg})
+		json({err:validationErrors.array()[0].msg})
 	}
 	
 
