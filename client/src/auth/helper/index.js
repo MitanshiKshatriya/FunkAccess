@@ -1,13 +1,22 @@
 import {API} from '../../backend'
 import axios from 'axios'
 
+const config = {
+    headers: {
+        "Content-type": "application/json"
+    }
+}
+
 export const signup = async user => {
     try {
-        const response = await axios.post(`${API}/signup`, user)
-        return response
+        const response = await axios.post(`${API}/signup`, user, config)
+        // console.log("RESPONSE = "+JSON.stringify(response.data))
+        return response.data
     } catch (err) {
-        console.log(err)
+        // console.log("ERROR = "+JSON.stringify(err.response.data))
+        return err.response.data
     }
+    
 }
 
 export const signout = async user => next => {
