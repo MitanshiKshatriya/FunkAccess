@@ -1,4 +1,5 @@
 const Product = require('../models/product')
+const { validationResult } = require('express-validator')
 const formidable = require("formidable")
 const _ = require("lodash")
 const fs = require("fs")
@@ -18,7 +19,7 @@ exports.getProductById = (req,res,next,id) => {
 }
 
 //create product
-exports.createProduct = (req,res) => {
+exports.createProductFile = (req,res) => {
 	let form = new formidable.IncomingForm();
 	form.keepExtensions = true
 
@@ -74,6 +75,29 @@ exports.createProduct = (req,res) => {
 
 	})
 }
+
+//create product
+exports.createProduct = (req,res) => {
+	const product = new Product(req.body)
+	
+	const validationErrors = validationResult(req)
+	if(!validationErrors.isEmpty()){
+		console.log(validationErrors.array())
+		return res.status(400).json({
+			err: validationErrors.array()[0].msg
+		})
+	}
+
+	product.save((err,prod)=>{
+		if(err){
+			return res.status(400).json({
+				err: "Not able to save product in DB"
+			})
+		}
+		return res.json(prod)
+	})
+}
+
 
 //get product
 exports.getProduct = (req,res) => {

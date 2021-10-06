@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const { check } = require('express-validator')
 
 const { getProductById, createProduct, getProduct, photo, removeProduct, updateProduct, getAllProduct, getAllUniqueCategory } = require("../controllers/product")
 const { isSignedIn, isAuthenticated, isAdmin } = require("../controllers/auth")
@@ -14,6 +15,14 @@ router.param("productId", getProductById)
 //create route
 router.post("/product/create/:userId",
 	isSignedIn, isAuthenticated, isAdmin,
+	[
+		check("name").notEmpty().withMessage("Name cannot be empty"),
+		check("desc").notEmpty().withMessage("Description cannot be empty"),
+		check("price").isNumeric().withMessage("Price should be numeric"),
+		check("stock").isNumeric().withMessage("Stock should be numeric"),
+		check("urlPhoto").isURL().withMessage("Please enter proper image link"),
+
+	],
 	createProduct
 	)
 
