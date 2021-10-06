@@ -37,10 +37,10 @@ exports.getCategoryById = (req,res,next,id) => {
 exports.createCategory = (req,res) => {
 
 	const category = new Category(req.body);
+	console.log(req.body)
 	const validationErrors = validationResult(req)
-
 	if(!validationErrors.isEmpty()){
-		return res.json({
+		return res.status(400).json({
 			err: validationErrors.array()[0].msg
 		})
 	}
