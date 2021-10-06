@@ -55,7 +55,7 @@ const AddProduct = () => {
 
         createProduct(user._id, token, product )
         .then(data=>{
-            console.log("HERE WE GOOOO = ",data);
+            // console.log("HERE WE GOOOO = ",data);
             setValues({...values,loading:false})
             if(data.err){
                 setValues({...values, err:data.err})
