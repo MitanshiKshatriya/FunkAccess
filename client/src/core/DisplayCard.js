@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 
-const DisplayCard = ({imgLink}) => {
+const DisplayCard = ({name,price,imgLink}) => {
     return (
         <div>
              <div className="shadow-lg rounded-lg">
@@ -9,9 +9,9 @@ const DisplayCard = ({imgLink}) => {
           <img src={imgLink} alt="name" className="rounded-tl-lg rounded-tr-lg gridImage" />
         </Link>
         <div className="p-3">
-          <h3><Link to="/" className="text-xl">Blue Denim Dress</Link></h3>
+          <h3><Link to="/" className="text-xl">{name}</Link></h3>
           <div className="flex flex-row my-1">
-            <Link to="/"  className=" text-gray-700 font-semibold rounded-md px-2 py-1 mr-2 text-xl" >&#x20B9;250</Link>
+            <Link to="/"  className=" text-gray-700 font-semibold rounded-md px-2 py-1 mr-2 text-xl" >&#x20B9;{price}</Link>
           </div>
           <div className="flex flex-col xl:flex-row justify-between">
             <Link to="/"  className="bg-gradient-to-r from-red-600 to-pink-500 rounded-full py-2 px-4 my-2 text-sm text-white hover:bg-pink-600 hover:from-pink-600 hover:to-pink-600 flex flex-row justify-center" >

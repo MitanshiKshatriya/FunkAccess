@@ -1,15 +1,38 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Footer  from './Footer'
 import Navbar from './Navbar'
 import DisplaySection from './DisplaySection'
 import s1 from "../assets/s5.PNG"
+import { getProducts } from './helper/coreapicalls'
 const Home = () => {
+
+    const [products, setProducts] = useState([])
+    const [err, setErr] = useState('')
+    const [loading, setLoading] = useState(false)
+
+    const loadAllProducts = () => {
+      setLoading(true)
+      getProducts().then(data=>{
+        // console.log(data,err)
+        setLoading(false)
+        if(data.err){
+          setErr(data.err)
+        }else{
+          setProducts(data)
+        }
+      })
+    }
+
+    useEffect(()=>{
+      loadAllProducts()
+    },[])
+
     return (
         <div className="container h-8 mx-auto p-4">
         <Navbar cart={0}/>
            <HeroSection/>
-           <DisplaySection/>
+          {!err && !loading && <DisplaySection products={products}/> }
         <Footer/>  
         </div>
     )
