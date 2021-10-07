@@ -131,7 +131,7 @@ exports.removeProduct = (req,res) => {
 }
 
 //update product
-exports.updateProduct = (req,res) => {
+exports.updateProduct1 = (req,res) => {
 	let form = new formidable.IncomingForm();
 	form.keepExtensions = true
 
@@ -180,6 +180,29 @@ exports.updateProduct = (req,res) => {
 
 	})
 }
+
+//create product
+exports.updateProduct = (req,res) => {
+	let product = req.product
+	product = _.extend(product, req.body)
+
+	const {name,desc,price,category,stock,urlPhoto} = product
+	if(!name || !desc || !price || !category || !stock || !urlPhoto){
+		return res.status(400).json({
+			err: "Some fields are missing"
+		})
+	}
+
+	product.save((err,prod)=>{
+		if(err){
+			return res.status(400).json({
+				err: "Not able to update product in DB"
+			})
+		}
+		return res.json(prod)
+	})
+}
+
 
 //get all product
 exports.getAllProduct = (req,res) => {
