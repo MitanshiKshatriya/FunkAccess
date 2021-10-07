@@ -15,6 +15,9 @@
     max-height: 300px;
     width: 100%;
 }
+.tableImage{
+    max-width: 100px;
+}
 .nav-active{
     font-weight: 900;
 }

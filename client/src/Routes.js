@@ -13,7 +13,7 @@ import UserDashBoard from "./user/UserDashBoard"
 import AdminDashBoard from "./user/AdminDashBoard"
 import AddCategory from './admin/AddCategory'
 import AddProduct from './admin/AddProduct'
-import ManageProduct from './admin/ManageProducts'
+import ManageProducts from './admin/ManageProducts'
 import ManageCategories from './admin/ManageCategories'
 
 const Routes = () => {
@@ -28,7 +28,7 @@ const Routes = () => {
                <AdminRoutes path="/admin/dashboard" exact component={AdminDashBoard}/>
                <AdminRoutes path="/admin/create/product" exact component={AddProduct}/>
                <AdminRoutes path="/admin/create/category" exact component={AddCategory}/>
-               <AdminRoutes path="/admin/products" exact component={ManageProduct}/>
+               <AdminRoutes path="/admin/products" exact component={ManageProducts}/>
                <AdminRoutes path="/admin/categories" exact component={ManageCategories}/>
                <AdminRoutes path="/admin/orders" exact component={AdminDashBoard}/>
            </Switch>

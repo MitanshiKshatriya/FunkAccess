@@ -26,7 +26,7 @@ const AdminBase = ({children}) => {
                 <li className={styles.adminNavItem}>
                 <Link to="/admin/create/product" className={styles.linkStyle}>Create Product</Link></li>
                 <li className={styles.adminNavItem}>
-                <Link to="/admin/proucts" className={styles.linkStyle}>Manage Products</Link></li>
+                <Link to="/admin/products" className={styles.linkStyle}>Manage Products</Link></li>
                 <li className={styles.adminNavItem}>
                 <Link to="/admin/orderes" className={styles.linkStyle}>Manage Orderes</Link></li>
             </ul>
