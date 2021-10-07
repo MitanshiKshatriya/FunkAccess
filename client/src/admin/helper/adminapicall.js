@@ -30,7 +30,55 @@ export const getCategories = async () => {
     }
 }
 
-// product calls
+//get category by Id
+export const getCategory = async (cateId) => {
+    try {
+        const response = await axios.get(`${API}/category/${cateId}`)
+        return response.data
+    } catch (err) {
+        return err.response.data
+    }
+}
+
+//update category
+export const updateCategory = async (cateId, userId, token, category) => {
+    const config = {
+        headers:{
+            'Content-Type':'application/json',
+            Accept: 'application/json',
+            Authorization: `Bearer ${token}`
+        }
+    }
+    try {
+        const response = await axios.put(`${API}/category/${cateId}/${userId}`,category,config)
+        return response.data
+    } catch (err) {
+        return err.response.data
+    }
+}
+
+// delete category
+export const deleteCategory = async (cateId, userId, token) => {
+    const config = {
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+        }
+    }
+    try{
+        const response = await axios.delete(`${API}/category/${cateId}/${userId}`,config)
+        return response.data
+    } catch(err){
+        return err.response.data
+    }
+}
+
+/*
+*
+*  PRODUCT CALLS
+*
+*/
 
 //create product
 export const createProduct = async (userId, token, product) =>{
@@ -69,7 +117,7 @@ export const getProduct = async (productId) => {
     }
 }
 
-//udate a product
+//update a product
 export const updateProduct = async (productId, userId, token, product) =>{
     const config = {
         headers: {
