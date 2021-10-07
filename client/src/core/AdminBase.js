@@ -17,7 +17,7 @@ const AdminBase = ({children}) => {
         <div className="md:flex md:flex-row md:justify-around bg-purple-200 shadow min-w-3/4">
         <div className="bg-purple-300 shadow-lg">
             <h2 className="font-bold text-center px-8 py-4 border-b-2 bg-purple-700 text-white">
-            <Link to="/admin/orderes" className={styles.linkStyle1}>Admin Navigation</Link></h2>
+            <Link to="/admin/dashboard" className={styles.linkStyle1}>Admin Navigation</Link></h2>
             <ul className="list-none border-b-2">
                 <li className={styles.adminNavItem}>
                 <Link to="/admin/create/category" className={styles.linkStyle}>Create Categories</Link></li>
@@ -28,7 +28,7 @@ const AdminBase = ({children}) => {
                 <li className={styles.adminNavItem}>
                 <Link to="/admin/products" className={styles.linkStyle}>Manage Products</Link></li>
                 <li className={styles.adminNavItem}>
-                <Link to="/admin/orderes" className={styles.linkStyle}>Manage Orderes</Link></li>
+                <Link to="/admin/orders" className={styles.linkStyle}>Manage Orderes</Link></li>
             </ul>
         </div>
         <div className="flex-grow">
