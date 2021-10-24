@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import {Link, Redirect} from 'react-router-dom'
-import { addItemToCart } from './helper/cardHelper';
+import { addItemToCart } from './helper/cartHelper';
 
 const DisplayCard = ({name,price,imgLink,product}) => {
 

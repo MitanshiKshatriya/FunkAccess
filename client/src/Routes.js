@@ -6,6 +6,7 @@ import PrivateRoutes from './auth/helper/PrivateRoutes'
 import AdminRoutes from './auth/helper/AdminRoutes'
 
 import Home from "./core/Home"
+import Cart from "./core/Cart"
 import Signin from './user/Signin'
 import Signup from "./user/Signup"
 import Profile from "./user/Profile"
@@ -23,6 +24,7 @@ const Routes = () => {
        <BrowserRouter>
            <Switch>
                <Route path="/" exact component={Home}/>
+               <Route path="/cart" exact component={Cart}/>
                <Route path="/signup" exact component={Signup}/>
                <Route path="/signin" exact component={Signin}/>
                <PrivateRoutes path="/profile" exact component={Profile}/>
