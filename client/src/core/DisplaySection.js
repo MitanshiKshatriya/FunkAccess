@@ -17,7 +17,7 @@ const ProductsGallery = ({products}) => {
   else {
     return <>
       {products.map((prod,idx)=>(
-        <DisplayCard key={idx} name={prod.name} price={prod.price} imgLink={prod.urlPhoto}/>
+        <DisplayCard key={idx} name={prod.name} price={prod.price} imgLink={prod.urlPhoto} product={prod}/>
       ))}
     </>
   }
