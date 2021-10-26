@@ -95,7 +95,7 @@ const isSignedIn = expressJwt({
 
 // custom middleware
 const isAuthenticated = (req,res,next) => {
-	// req.profile sent in frontend
+	// req.profile sent from getUserById func
 	let checker = req.profile && req.auth 
 				&& req.profile._id == req.auth._id
 	if(!checker){
