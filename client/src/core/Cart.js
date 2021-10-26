@@ -14,7 +14,7 @@ const Cart = () => {
         setProducts(loadCart())
     }, [reload])
 
-    const loadAllProducts = () => {
+    const loadAllProducts = (products) => {
         return (
             <div>
             <h2>This section is to load product</h2>
@@ -40,7 +40,10 @@ const Cart = () => {
     return (
         <Base>
         <div className="flex">
-        {loadAllProducts()}
+        {products.length > 0 ? 
+        loadAllProducts(products) : 
+        <h3>Cart is empty.<Link>SHOP NOW!</Link></h3>
+        }
         {loadCheckout()}
             {/*  */}
         </div>

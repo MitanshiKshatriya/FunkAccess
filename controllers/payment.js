@@ -2,9 +2,9 @@ const braintree = require("braintree");
 
 const gateway = new braintree.BraintreeGateway({
   environment: braintree.Environment.Sandbox,
-  merchantId: "useYourMerchantId",
-  publicKey: "useYourPublicKey",
-  privateKey: "useYourPrivateKey"
+  merchantId: process.env.useYourMerchantId,
+  publicKey: process.env.useYourPublicKey,
+  privateKey: process.env.useYourPrivateKey
 });
 
 
@@ -13,7 +13,7 @@ exports.getToken = ( req, res ) => {
 //   customerId: aCustomerId
     }, (err, response) => {
         if(err){
-            res.status(500).json(err)
+            res.status(500).send(err)
         }else{
 //   const clientToken = response.clientToken
         res.send(response)
@@ -34,9 +34,9 @@ exports.processPayment = ( req, res ) => {
         }
       }, (err, result) => {
           if(err){
-              res.status(500).json(err)
+              res.status(500).send(err)
           }else{
-              res.json(result)
+              res.send(result)
           }
       });
 }
