@@ -1,7 +1,6 @@
 import { API } from "../../backend";
 
 export const getmeToken = async (userId, token, user) => {
-    console.log(userId)
     try {
         const response = await fetch(`${API}/payment/gettoken/${userId}`, {
             method: "GET",
@@ -12,13 +11,13 @@ export const getmeToken = async (userId, token, user) => {
             }
         }
         );
-        return await response.json();
+        return await response.json(); // {clientToken:"", success: true}
     } catch (err) {
         return console.log(err);
     }
 } 
 
-export const proccessPayment = async (userId, token, paymentInfo) => {
+export const processPayment = async (userId, token, paymentInfo) => {
     try {
         const response = await fetch(`${API}/payment/braintree/${userId}`, {
             method: "POST",

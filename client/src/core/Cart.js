@@ -5,6 +5,7 @@ import Base from './Base'
 import CartCard from './CartCard'
 
 import { loadCart } from './helper/cartHelper'
+import Payment from './Payment'
 
 const Cart = () => {
     const [products, setProducts] = useState([])
@@ -44,7 +45,7 @@ const Cart = () => {
         loadAllProducts(products) : 
         <h3>Cart is empty.<Link>SHOP NOW!</Link></h3>
         }
-        {loadCheckout()}
+        <Payment products={products} reload={reload} setReload={setReload}/>
             {/*  */}
         </div>
         </Base>

@@ -38,8 +38,30 @@ export const removeItemFromCart = (productId) => {
 
 // emptying cart
 export const cartEmpty = (next) => {
+    let cart = []
     if(typeof window !== undefined){
         localStorage.removeItem("cart")
+        localStorage.setItem("cart",JSON.stringify(cart))
         next()
+    }
+
+}
+
+// get number of items in cart
+// update to context?
+export const countCartItems = () => {
+    let cart = []
+    if(typeof window !== undefined){
+        cart = localStorage.getItem("cart")
+        try{
+            let c = JSON.parse(cart)
+            if(c === null || c.length === undefined)
+            return 0
+            else
+            return c.length
+        }
+        catch(e){
+            return 0
+        }
     }
 }
