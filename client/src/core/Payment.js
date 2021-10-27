@@ -87,7 +87,7 @@ const Payment = ({products, reload = undefined, setReload = f => f}) => {
         let amount = 0;
         products.map( p =>
             {
-                amount += p.price
+                amount += (p.price*p.count)
             }
             )
         return amount
