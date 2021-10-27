@@ -45,7 +45,7 @@ const Cart = () => {
         loadAllProducts(products) : 
         <h3>Cart is empty.<Link>SHOP NOW!</Link></h3>
         }
-        <Payment products={products} reload={reload} setReload={setReload}/>
+        {/* <Payment products={products} reload={reload} setReload={setReload}/> */}
             {/*  */}
         </div>
         </Base>

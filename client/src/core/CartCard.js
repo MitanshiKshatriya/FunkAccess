@@ -1,18 +1,24 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { removeItemFromCart } from './helper/cartHelper'
+import { addItemToCart, removeItemFromCart, removeOneItemFromCart } from './helper/cartHelper'
 
 const CartCard = ({ 
-  product, 
-  qty, 
+  product,  
   reload = undefined , 
   setReload = f => f // get f back
 }) => {
     const {name,price,urlPhoto} = product
+    const addToCart = () => {
+      addItemToCart(product,()=>setReload(!reload))
+    }
     const removeFromCart = () => {
         removeItemFromCart(product._id)
         setReload(!reload)
     }
+    const removeOneFromCart = () => {
+      removeOneItemFromCart(product._id)
+      setReload(!reload)
+  }
     return (
         <div>
              <div className="shadow-lg rounded-lg flex">
@@ -21,6 +27,10 @@ const CartCard = ({
              </div>
         <div className="p-3">
           <h3><Link to="/" className="text-xl">{name}</Link></h3>
+          <h6>
+          <button onClick={addToCart}>+</button>
+          {product.count}
+          <button onClick={removeOneFromCart}>-</button></h6>
           <div className="flex flex-row my-1">
             <Link to="/"  className=" text-gray-700 font-semibold rounded-md px-2 py-1 mr-2 text-xl" >&#x20B9;{price}</Link>
           </div>
