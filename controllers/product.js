@@ -254,6 +254,7 @@ exports.updateStockAndInventory = (req,res,next) => {
 	
 	let myOperations = req.body.order.products
 	.map(prod => {
+		prod.count = prod.count ? prod.count : 0
 		return {
 			updateOne: {
 				filter: {_id: prod._id},
@@ -269,7 +270,8 @@ exports.updateStockAndInventory = (req,res,next) => {
 	Product.bulkWrite(myOperations,{}, 
 		(err,products)=>{
 			if(err){
-				res.status(400).json({
+				console.log(err)
+				return res.status(400).json({
 					err: "Bulk Operation failed"
 				})
 			}
