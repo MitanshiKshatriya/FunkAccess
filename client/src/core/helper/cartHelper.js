@@ -87,7 +87,15 @@ export const countCartItems = () => {
             if(c === null || c.length === undefined)
             return 0
             else
-            return c.length
+            {
+                let total = 0;
+                c.map( p =>
+                {
+                total += (p.count)
+                }
+                )
+                return total
+            }
         }
         catch(e){
             return 0
