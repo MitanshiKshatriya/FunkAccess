@@ -22,12 +22,13 @@ const UpdateProduct = ({match}) => {
         // categories:[],
         getRedirect: false,
         createdProduct: "",
-        err: false,
-        success: false,
         loading: false,
     })
 
-    const {name, desc, price, category, stock, urlPhoto, err, success, loading} = values;
+    const [ success, setSuccess ] = useState(false)
+    const [ err, setErr ] = useState(false)
+
+    const {name, desc, price, category, stock, urlPhoto, loading} = values;
 
     const preloadCategories = () => {
         getCategories().then(data=>{
@@ -64,23 +65,28 @@ const UpdateProduct = ({match}) => {
     }, [])
 
     const handleChange = name => event => {
-        setValues({...values, err: false, [name]:event.target.value})
+        setValues({...values, [name]:event.target.value})
+        setErr("")
     }
 
     const onSubmit = (event) => {
         event.preventDefault()
-        setValues({...values, error:"", loading: true, success: false})
+        setValues({...values, loading: true})
+        setSuccess(false)
+        setErr("")
         const product = {name,desc,price,
             category,stock,urlPhoto}
         updateProduct(match.params.prodId, user._id, 
             token, product).then(data=>{
                 setValues({...values,loading:false})
                 if(data.err){
-                    setValues({...values,err:data.err})
+                    setValues({...values})
+                    setErr(data.err)
                 }else{
                     setValues({
-                        ...values, success: true
+                        ...values
                     })
+                    setSuccess(true)
                 }
             }).catch(err=>console.log(err))
 
@@ -92,37 +98,37 @@ const UpdateProduct = ({match}) => {
         <div className="m-3">
   <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
     <div className="mb-4">
-      <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
+      <label className="block text-gray-darkest text-sm font-bold mb-2" htmlFor="name">
         Name
       </label>
-      <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Product Name"
+      <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-darkest leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Product Name"
           onChange={handleChange("name")}
           value={name}
       />
     </div>
     <div className="mb-4">
-      <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="description">
+      <label className="block text-gray-darkest text-sm font-bold mb-2" htmlFor="description">
         Description
       </label>
-      <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Description"
+      <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-darkest leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Description"
           onChange={handleChange("desc")}
           value={desc}
       />
     </div>
     <div className="mb-4">
-      <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="price">
+      <label className="block text-gray-darkest text-sm font-bold mb-2" htmlFor="price">
         Price
       </label>
-      <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="number" step="0.01" placeholder="Price"
+      <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-darkest leading-tight focus:outline-none focus:shadow-outline" type="number" step="0.01" placeholder="Price"
           onChange={handleChange("price")}
           value={price}
       />
     </div>
     <div className="mb-4">
-      <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="price">
+      <label className="block text-gray-darkest text-sm font-bold mb-2" htmlFor="price">
         Category
       </label>
-      <select className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Category"
+      <select className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-darkest leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Category"
           onChange={handleChange("category")}
           value={category}
       >
@@ -139,26 +145,26 @@ const UpdateProduct = ({match}) => {
       </select>
     </div>
     <div className="mb-4">
-      <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="stock">
+      <label className="block text-gray-darkest text-sm font-bold mb-2" htmlFor="stock">
         Stock
       </label>
-      <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="number" placeholder="Stock"
+      <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-darkest leading-tight focus:outline-none focus:shadow-outline" type="number" placeholder="Stock"
           onChange={handleChange("stock")}
           value={stock}
       />
     </div>
     <div className="mb-4">
-      <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="urlPhoto">
+      <label className="block text-gray-darkest text-sm font-bold mb-2" htmlFor="urlPhoto">
         Image Link
       </label>
-      <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Image Link"
+      <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-darkest leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Image Link"
           onChange={handleChange("urlPhoto")}
           value={urlPhoto}
       />
     </div>
 
     <button 
-      className={"hover:bg-purple-500 bg-purple-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"} type="button"
+      className={"hover:bg-pink-darker bg-pink-dark text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"} type="button"
       onClick={onSubmit}
       disabled={loading}
       style={{cursor: loading ? "progress": "pointer"}}
@@ -167,13 +173,13 @@ const UpdateProduct = ({match}) => {
       </button>
       <Link to="/admin/dashboard"
       // className="hover:bg-purple-500 bg-purple-700 text-white font-bold py-2 px-4 md:mx-3 my-2 rounded focus:outline-none focus:shadow-outline md:inline-block block" 
-      className = "align-baseline font-bold text-sm text-purple-800 hover:text-purple-500 underline px-4"
+      className = "align-baseline font-bold text-sm text-pink-dark hover:text-pink-darker underline px-4"
       
       >
         Admin Dashboard
       </Link>
     </form>
-    <p className="max-w-3/4"style={{wordBreak:'break-all'}}>{JSON.stringify(values)}</p>
+    {/* <p className="max-w-3/4"style={{wordBreak:'break-all'}}>{JSON.stringify(values)}</p> */}
     </div>
     </div>
         )
@@ -181,8 +187,8 @@ const UpdateProduct = ({match}) => {
 
     return (
     <AdminBase>
-    <Success msg={"product created successfully"} bool={success}/>
-    <Failure msg={err} bool={err}/>
+    <Success msg={"product created successfully"} bool={success} setBool={setSuccess}/>
+    <Failure msg={err} bool={err} setBool={setErr}/>
     {UpdateProductForm()}
     </AdminBase>
     )

@@ -21,17 +21,19 @@ const AddProduct = () => {
         categories:[],
         getRedirect: false,
         createdProduct: "",
-        err: false,
-        success: false,
         loading: false,
     })
 
-    const {name, desc, price, category, categories, stock, urlPhoto, err, success, loading} = values;
+    const [ success, setSuccess ] = useState(false)
+    const [ err, setErr ] = useState(false)
+
+    const {name, desc, price, category, categories, stock, urlPhoto, loading} = values;
 
     const preload = () => {
         getCategories().then(data=>{
             if(data.err){
-                setValues({...values,err:data.err})
+                setValues({...values})
+                setErr(data.err)
             } else {
                 setValues({...values, categories: data})
                 
@@ -44,12 +46,15 @@ const AddProduct = () => {
     }, [])
 
     const handleChange = name => event => {
-        setValues({...values, err: false, [name]:event.target.value})
+        setValues({...values, [name]:event.target.value})
+        setErr("")
     }
 
     const onSubmit = (event) => {
         event.preventDefault()
-        setValues({...values, err:"",success:false,loading:true})
+        setValues({...values,loading:true})
+        setErr("")
+        setSuccess(false)
         const product = {name,desc,price,
             category,stock,urlPhoto}
 
@@ -58,7 +63,8 @@ const AddProduct = () => {
             // console.log("HERE WE GOOOO = ",data);
             setValues({...values,loading:false})
             if(data.err){
-                setValues({...values, err:data.err})
+                setValues({...values})
+                setErr(data.err)
             }else{
                 setValues({
                     ...values,
@@ -68,8 +74,8 @@ const AddProduct = () => {
                     category: "default",
                     stock: "",
                     urlPhoto: "",
-                    success: true
                 })
+                setSuccess(true)
             }
         }).catch(err=>console.log(err))
     }
@@ -146,7 +152,7 @@ const AddProduct = () => {
     </div>
 
     <button 
-      className={"hover:bg-purple-500 bg-purple-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"} type="button"
+      className={"hover:bg-pink-darker bg-pink-dark text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"} type="button"
       onClick={onSubmit}
       disabled={loading}
       style={{cursor: loading ? "progress": "pointer"}}
@@ -154,14 +160,13 @@ const AddProduct = () => {
         Add Product
       </button>
       <Link to="/admin/dashboard"
-      // className="hover:bg-purple-500 bg-purple-700 text-white font-bold py-2 px-4 md:mx-3 my-2 rounded focus:outline-none focus:shadow-outline md:inline-block block" 
-      className = "align-baseline font-bold text-sm text-purple-800 hover:text-purple-500 underline px-4"
+      className = "align-baseline font-bold text-sm text-pink-dark hover:text-pink-darker underline px-4"
       
       >
         Admin Dashboard
       </Link>
     </form>
-    <p className="max-w-3/4"style={{wordBreak:'break-all'}}>{JSON.stringify(values)}</p>
+    {/* <p className="max-w-3/4"style={{wordBreak:'break-all'}}>{JSON.stringify(values)}</p> */}
     </div>
     </div>
         )
@@ -169,8 +174,8 @@ const AddProduct = () => {
 
     return (
     <AdminBase>
-    <Success msg={"product created successfully"} bool={success}/>
-    <Failure msg={err} bool={err}/>
+    <Success msg={"product created successfully"} bool={success} setBool={setSuccess}/>
+    <Failure msg={err} bool={err} setBool={setErr}/>
     {AddProductForm()}
     </AdminBase>
     )

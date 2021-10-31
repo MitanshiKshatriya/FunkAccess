@@ -61,7 +61,7 @@ const AddCategory = () => {
       />
     </div>
     <button 
-      className={"hover:bg-purple-500 bg-purple-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"} type="button"
+      className={"hover:bg-pink-darker bg-pink-dark text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"} type="button"
       onClick={onSubmit}
       disabled={loading}
       style={{cursor: loading ? "progress": "pointer"}}
@@ -70,7 +70,7 @@ const AddCategory = () => {
       </button>
       <Link to="/admin/dashboard"
       // className="hover:bg-purple-500 bg-purple-700 text-white font-bold py-2 px-4 md:mx-3 my-2 rounded focus:outline-none focus:shadow-outline md:inline-block block" 
-      className = "align-baseline font-bold text-sm text-purple-800 hover:text-purple-500 underline px-4"
+      className = "align-baseline font-bold text-sm text-pink-dark hover:text-pink-darker underline px-4"
       
       >
         Admin Dashboard
