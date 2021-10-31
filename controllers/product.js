@@ -3,6 +3,7 @@ const { validationResult } = require('express-validator')
 const formidable = require("formidable")
 const _ = require("lodash")
 const fs = require("fs")
+const ObjectId = require('mongoose').Types.ObjectId
 
 //params get product by id
 exports.getProductById = (req,res,next,id) => {
@@ -213,9 +214,12 @@ exports.getAllProduct = (req,res) => {
 	req.query.sortBy : "_id"
 
 	let orderBy = req.query.orderBy ?
-	req.query.orderBy : "asc"
+	req.query.orderBy : ""
 
-	Product.find()
+	let category = req.query.category_id ?
+	{category: new ObjectId(req.query.category_id)}: {}
+
+	Product.find(category)
 	.select("-photo")
 	.limit(limit)
 	.sort([[sortBy, orderBy]])

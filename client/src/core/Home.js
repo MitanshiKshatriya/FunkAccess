@@ -7,33 +7,34 @@ import s2 from "../assets/s2.PNG"
 import { getProducts } from './helper/coreapicalls'
 const Home = () => {
 
-    const [products, setProducts] = useState([])
-    const [err, setErr] = useState('')
-    const [loading, setLoading] = useState(false)
+    // const [products, setProducts] = useState([])
+    // const [err, setErr] = useState('')
+    // const [loading, setLoading] = useState(false)
 
-    const loadAllProducts = () => {
-      setLoading(true)
-      getProducts().then(data=>{
-        // console.log(data,err)
-        setLoading(false)
-        if(data.err){
-          setErr(data.err)
-        }else{
-          setProducts(data)
-        }
-      })
-    }
+    // const loadAllProducts = () => {
+    //   setLoading(true)
+    //   getProducts({limit:4,category_name:'earrings'}).then(data=>{
+    //     // console.log(data,err)
+    //     setLoading(false)
+    //     if(data.err){
+    //       setErr(data.err)
+    //     }else{
+    //       setProducts(data)
+    //     }
+    //   })
+    // }
 
-    useEffect(()=>{
-      loadAllProducts()
-    },[])
+    // useEffect(()=>{
+    //   loadAllProducts()
+    // },[])
 
     return (
         <div className="">
         <Base>
         <div className="container">
            <HeroSection/>
-          {!err && !loading && <DisplaySection products={products}/> }
+          {/* {!err && !loading && <DisplaySection products={products}/> } */}
+          <CollectionsSection/>
         </div>
         </Base> 
         </div>
@@ -42,7 +43,7 @@ const Home = () => {
 
 const HeroSection = () => {
   return (
-      <div className="container p-0 bg-pink-lightest my-10 min-h-60">
+      <div className="container p-0 bg-pink-lightest  min-h-60">
       <div className="flex justify-center place-items-center">
       <div className="lg:block hidden">
         <img src={s1} alt="cover" className="h-85 w-90  rounded-tr-full"/>
@@ -71,6 +72,40 @@ const HeroSection = () => {
       </div>
       </div>
       </div>
+  )
+}
+
+const CollectionsSection = () => {
+  return (
+  <div className="flex lg:flex-row flex-col justify-center my-10">
+  <div className="container p-0 bg-blue-light underline  lg:min-h-60 min-h-30 flex flex-col 
+  text-center
+  justify-center place-items-center">
+    <h1 className="lg:text-4xl font-domine">
+      <Link to='/shop/614d820cc1cb58ca65618e02'>
+        Shop from our Earrings Collection
+      </Link>
+    </h1>
+  </div>
+  <div className="container p-0 bg-yellow-light underline  lg:min-h-60 min-h-30 flex flex-col 
+  text-center
+  justify-center place-items-center">
+    <h1 className="lg:text-4xl font-domine">
+      <Link to='/shop/615d7f87fa3fb32e73712903'>
+        Shop from our Necklace Collection
+      </Link>
+    </h1>
+  </div>
+  <div className="container p-0 bg-purple-light underline  lg:min-h-60 min-h-30 flex flex-col 
+  text-center
+  justify-center place-items-center">
+    <h1 className="lg:text-4xl font-domine">
+      <Link to='/shop/614ed320682eeca4d6ea2b69'>
+        Shop from our Nature Rings Collection
+      </Link>
+    </h1>
+  </div>
+  </div>
   )
 }
 

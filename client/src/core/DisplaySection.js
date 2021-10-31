@@ -2,23 +2,27 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import DisplayCard from './DisplayCard'
 
-const ProductsGallery = ({products}) => {
-  if(products.length===0)
+export const ProductsGallery = ({products}) => {
+  if(products && products.length===0)
   {
     return <>
+    <div className="grid grid-flow-row grid-cols-1 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">
 <DisplayCard name="Blue Denim Dress" price={100} imgLink='https://i.imgur.com/wI1vH3t.png'/>
 <DisplayCard name="Blue Denim Dress" price={100} imgLink='https://imgur.com/oe85NTH.png'/>
 <DisplayCard name="Blue Denim Dress" price={100} imgLink='https://imgur.com/f6GuDuO.png'/>
 <DisplayCard name="Blue Denim Dress" price={100} imgLink='https://imgur.com/qCcZb7E.png'/>
 <DisplayCard name="Blue Denim Dress" price={100} imgLink='https://imgur.com/VPKtx98.png'/>
 <DisplayCard name="Blue Denim Dress" price={100} imgLink='https://imgur.com/kpmXT2u.png'/>
+</div>
     </>
   }
   else {
     return <>
+    <div className="mx-10 grid grid-flow-row grid-cols-1 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">
       {products.map((prod,idx)=>(
         <DisplayCard key={idx} name={prod.name} price={prod.price} imgLink={prod.urlPhoto} product={prod}/>
       ))}
+    </div>
     </>
   }
 }
@@ -36,14 +40,13 @@ const DisplaySection = ({products}) => {
           </svg>
         </Link>
       </div>
-    <div className="grid grid-flow-row grid-cols-1 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">
+    {/* <div className="grid grid-flow-row grid-cols-1 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10"> */}
 
 <ProductsGallery products={products}/>
 
-    </div>
+    {/* </div> */}
     </div>
         </div>
     )
 }
-
 export default DisplaySection

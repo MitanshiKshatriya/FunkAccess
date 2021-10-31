@@ -65,6 +65,7 @@ const Test = ({history}) => {
                     <div className="hidden md:block">
                         <div className="ml-10 flex items-baseline space-x-4">
                             <NavLink to="/" className="hover:bg-white hover:text-pink-lighter hover:no-underline text-gray-darkest px-3 py-2 rounded-md text-sm font-medium">Home</NavLink>
+                            <NavLink to="/shop" className="hover:bg-white hover:text-pink-lighter hover:no-underline text-gray-darkest px-3 py-2 rounded-md text-sm font-medium">Shop</NavLink>
                             {authLinks('')}
                             <NavLink to="/" className="hover:bg-white hover:text-pink-lighter hover:no-underline text-gray-darkest px-3 py-2 rounded-md text-sm font-medium">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -137,6 +138,8 @@ const Test = ({history}) => {
                         <div className="md:hidden" id="mobile-menu">
                             <div ref={ref} className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                             <NavLink to="/" className="hover:bg-white hover:text-pink-lighter hover:no-underline text-gray-darkest px-3 py-2 rounded-md text-sm font-medium block">Home</NavLink>
+                            <NavLink to="/shop" className="hover:bg-white hover:text-pink-lighter hover:no-underline text-gray-darkest px-3 py-2 rounded-md text-sm font-medium block">Shop</NavLink>
+
                             {authLinks(' block')}
                             <NavLink to="/" className="hover:bg-white hover:text-pink-lighter hover:no-underline text-gray-darkest px-3 py-2 rounded-md text-sm font-medium block">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">

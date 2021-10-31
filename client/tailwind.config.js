@@ -26,6 +26,7 @@ module.exports = {
       'full':'100%',
       '60': '60vh',
       '90': '90vh',
+      '30': '20vh' 
     },
     maxWidth:{
       '0': '0',
@@ -48,16 +49,19 @@ module.exports = {
         darkest: '#831843'
       },
       purple:{
-        DEFAULT: '#6B21A8'
+        DEFAULT: '#6B21A8',
+        light: '#EDE9FE'
       },
       red: {
         DEFAULT: '#EF4444'
     },
       blue: {
         DEFAULT: '#132e48',
+        light: '#E0E7FF'
       },
       yellow: {
         DEFAULT: '#e8bc10',
+        light: '#FEF3C7'
       },
       green: {
         DEFAULT: '#056947',
