@@ -16,6 +16,14 @@ export const NotProductsFound = () => {
     )
 }
 
+export const ErrorFS = ({msg}) => {
+    return (
+        <div className="flex justify-center place-items-center h-90">
+        <h1>{msg}</h1>
+        </div>
+    )
+}
+
 const Test = ({match}) => {
     return (
         <div className="flex justify-center place-items-center h-screen">

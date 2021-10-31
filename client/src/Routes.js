@@ -21,6 +21,7 @@ import UpdateProduct from './admin/UpdateProduct'
 import UpdateCategory from './admin/UpdateCategory'
 import ShopCategory from './core/ShopCategory'
 import Shop from './core/Shop'
+import ViewDetails from './core/ViewDetails'
 
 const Routes = () => {
     return (
@@ -33,6 +34,7 @@ const Routes = () => {
                <Route path="/test" exact component={Test}/>
                <Route path="/shop" exact component={Shop}/>
                <Route path="/shop/:cateId" exact component={ShopCategory}/>
+               <Route path="/product/:prodId" exact component={ViewDetails}/>
                <PrivateRoutes path="/profile" exact component={Profile}/>
                <PrivateRoutes path="/user/dashboard" exact component={UserDashBoard}/>
                <AdminRoutes path="/admin/dashboard" exact component={AdminDashBoard}/>
