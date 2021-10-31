@@ -21,3 +21,46 @@
 .nav-active{
     font-weight: 900;
 }
+a:hover{
+    /* text-decoration: none; */
+    color: inherit;
+}
+.customCard{
+    display: flex;
+    flex-wrap: wrap;
+}
+.customCardImg{
+    flex: 1;
+}
+.customCardP{
+    flex: 2;
+}
+.customCart{
+    display: flex;
+    flex-wrap: wrap;
+}
+.customCartInfo{
+    flex: 2;
+    margin: 10px 30px;
+}
+.customCartPayment{
+    flex: 1;
+}
+
+@media only screen and (max-width: 600px) 
+{
+    .customCart{
+        display: flex;
+        flex-direction: column;
+    }
+    .customCartInfo{
+        flex: 1;
+        margin: 10px 30px;
+    }
+    .customCartPayment{
+        flex: 1;
+    }
+    
+}
+
+

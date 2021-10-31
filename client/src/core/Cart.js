@@ -18,7 +18,6 @@ const Cart = () => {
     const loadAllProducts = (products) => {
         return (
             <div>
-            <h2>This section is to load product</h2>
             {products && products.map((product,idx)=>{
                 return <CartCard key={idx} 
                 product={product} 
@@ -32,20 +31,25 @@ const Cart = () => {
         )
     }
 
-    const loadCheckout = () => {
-        return (
-            <div>This section is to checkout</div>
-        )
-    }
+    // const loadCheckout = () => {
+    //     return (
+    //         <div>This section is to checkout</div>
+    //     )
+    // }
     
     return (
         <Base>
-        <div className="flex">
+        <h1 className="text-5xl text-center">Your Cart</h1>
+        <div className="customCart lg:mx-32">
+        <div className="customCartInfo">
         {products.length > 0 ? 
         loadAllProducts(products) : 
         <h3>Cart is empty.<Link>SHOP NOW!</Link></h3>
         }
+        </div>
+        <div className="customCartPayment">
         <Payment products={products} reload={reload} setReload={setReload}/>
+        </div>
             {/*  */}
         </div>
         </Base>

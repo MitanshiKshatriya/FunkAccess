@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import Footer  from './Footer'
-import Navbar from './Navbar'
+import Base  from './Base'
 import DisplaySection from './DisplaySection'
 import s1 from "../assets/s5.PNG"
+import s2 from "../assets/s2.PNG"
 import { getProducts } from './helper/coreapicalls'
 const Home = () => {
 
@@ -29,39 +29,44 @@ const Home = () => {
     },[])
 
     return (
-        <div className="container h-8 mx-auto p-4">
-        <Navbar cart={0}/>
+        <div className="">
+        <Base>
+        <div className="container">
            <HeroSection/>
           {!err && !loading && <DisplaySection products={products}/> }
-        <Footer/>  
+        </div>
+        </Base> 
         </div>
     )
 }
 
 const HeroSection = () => {
   return (
-      <div className="container p-0 bg-purple-200 bg-gradient-to-br from-purple-400 via-purple-200 to-purple-400 my-10">
-      <div className="flex justify-center items-center">
-      <div className="">
+      <div className="container p-0 bg-pink-lightest my-10 min-h-60">
+      <div className="flex justify-center place-items-center">
+      <div className="lg:block hidden">
         <img src={s1} alt="cover" className="h-85 w-90  rounded-tr-full"/>
       </div>
+      {/* <div class="about-img">
+              <img src={s2} alt=""/>
+      </div> */}
       <div className="text-center">
       <h1
-      className=" uppercase text-5xl text-center font-bold my-4 font-domine">
+      className=" uppercase lg:text-5xl text-2xl text-center font-bold my-4 font-domine">
       Buy Handmade Accessiories</h1>
       <p 
-      className="uppercase text-gray-700 font-semibold tracking-wide text-center md:self-start md:text-left my-1">
+      className="uppercase text-gray-darkest font-semibold tracking-wide text-center md:self-start md:text-left my-1">
       New Collection is here.</p>
-      <p className="uppercase text-gray-700 font-semibold tracking-wide text-center md:self-start md:text-left my-1">Up your style game with these funky accessiories</p>
+      <p className="uppercase text-gray-darkest font-semibold tracking-wide text-center md:self-start md:text-left my-1 lg:mx-auto mx-2">Up your style game with these funky accessiories</p>
       <br/>
       <Link to="/shop" 
       className="bg-gradient-to-r 
-      from-purple-700 to-pink-500 rounded-full py-3 px-6 text-white uppercase text-xl md:self-start my-5
-      hover:no-underline hover:text-white
+      from-pink-darker to-pink-dark rounded-full py-3 px-6 text-white uppercase text-xl md:self-start my-5
+      hover:underline hover:text-white
       ">Shop Now</Link>
       
       </div>
-      <div className="">
+      <div className="lg:block hidden">
         <img src={s1} alt="cover" className="h-85 w-90  rounded-bl-full"/>
       </div>
       </div>

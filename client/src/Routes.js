@@ -7,6 +7,7 @@ import AdminRoutes from './auth/helper/AdminRoutes'
 
 import Home from "./core/Home"
 import Cart from "./core/Cart"
+import Test from "./core/Test"
 import Signin from './user/Signin'
 import Signup from "./user/Signup"
 import Profile from "./user/Profile"
@@ -27,6 +28,7 @@ const Routes = () => {
                <Route path="/cart" exact component={Cart}/>
                <Route path="/signup" exact component={Signup}/>
                <Route path="/signin" exact component={Signin}/>
+               <Route path="/test" exact component={Test}/>
                <PrivateRoutes path="/profile" exact component={Profile}/>
                <PrivateRoutes path="/user/dashboard" exact component={UserDashBoard}/>
                <AdminRoutes path="/admin/dashboard" exact component={AdminDashBoard}/>

@@ -104,15 +104,15 @@ const Payment = ({products, reload = undefined, setReload = f => f}) => {
                 {info.clientToken !== null 
                 && products.length > 0 ?
                 <div>
-                <h3>Total payable amount is: &#8377;{getAmount()}</h3>
+                <h2 className="text-2xl">Total payable amount is: &#8377;{getAmount()}</h2>
                 <DropIn
             options={{ authorization: info.clientToken }}
             onInstance={(instance) => (info.instance = instance)}
           />
-          <button onClick={onPurchase} className="btn bg-purple-700 text-gray-50 
+          <button onClick={onPurchase} className="btn bg-pink-darker text-white 
                 px-4 py-2.5 rounded-full hover:no-underline
-                hover:text-gray-50
-                hover:bg-purple-500
+                hover:text-white
+                hover:bg-pink-dark
                 ">Buy</button>
                 </div> :
                 (<div>
@@ -135,7 +135,6 @@ const Payment = ({products, reload = undefined, setReload = f => f}) => {
     
     return (
         <div>
-            <h3>Test bt</h3>
             {showbtdropIn()}
         </div>
     )
