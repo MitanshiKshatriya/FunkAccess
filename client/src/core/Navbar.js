@@ -15,7 +15,7 @@ const Test = ({history}) => {
         if(user){
             return (
                 <>
-                  <NavLink to="/profile" 
+                  <NavLink to="/user/dashboard" 
                 activeClassName="text-purple-500"
                 className={`hover:bg-white hover:text-pink-lighter hover:no-underline text-gray-darkest px-3 py-2 rounded-md text-sm font-medium ${additionalClassNames}`}>
                 Account</NavLink> 
