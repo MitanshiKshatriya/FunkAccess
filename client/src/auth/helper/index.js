@@ -22,6 +22,8 @@ export const signup = async user => {
 export const signout = async next => {
     if(typeof window !== "undefined"){
         localStorage.removeItem("jwt")
+        // Setting cart as empty after signout
+        localStorage.setItem("cart",JSON.stringify([]))
         next();
 
         try {
