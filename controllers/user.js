@@ -94,9 +94,9 @@ const pushOrderInPurchaseList = (req,res,next) => {
 			_id: product._id,
 			name: product.name,
 			urlPhoto: product.urlPhoto,
-			descripton: product.description,
+			desc: product.desc,
 			category: product.category,
-			quantity: product.quantity,
+			count: product.count,
 			amount: req.body.order.amount,
 			transaction_id: req.body.order.transaction_id 
 		})

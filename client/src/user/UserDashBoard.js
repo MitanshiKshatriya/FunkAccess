@@ -6,12 +6,19 @@ import Base from '../core/Base'
 import { isAuthenticated } from '../auth/helper/index'
 import { getUserOrderDetails } from './helper/userapicalls'
 
+const OrdersCard = ({product}) => {
+    return (<div className="my-2">
+
+        <h4 className="flex justify-around">
+        <Link to={`/product/${product._id}`} className="underline"> <span>{product.name}</span></Link>
+        <span className="px-3 py-2 bg-pink-dark text-white rounded-sm italic">{"Order Recieved"}</span>
+        </h4>
+            </div>
+        )
+}
+
 const UserDashboard = () => {
-    // const [user,setUser] = useState({
-    //     name: '',
-    //     email: '',
-    //     userId: ''
-    // })
+
     const [ order, setOrder ] = useState([])
     const [err, setErr] = useState(false)
     const [loading, setLoading] = useState(false)
@@ -30,7 +37,7 @@ const UserDashboard = () => {
             setLoading(false)
         })
         .catch(err=>{
-            setErr(err)
+            setErr('Some error occured')
             setLoading(false)
         })
     }
@@ -38,9 +45,7 @@ const UserDashboard = () => {
     const preload = () => {
         setLoading(true)
         if(user){
-            if(user.name && user.email){
-                // setUser({...user,email:u.email,name:u.name,userId:u._id})
-            }else{
+            if(!user.name || !user.email){
                 setErr(true)
             }
             setLoading(false)
@@ -62,7 +67,14 @@ const UserDashboard = () => {
                 {
                     order.length > 0 ? (
                     <>
-                    <h2 className='text-2xl'>Orders</h2>
+                    <h2 className='text-2xl text-center my-5 font-semibold underline'>Orders</h2>
+                    {
+                        order.map((o)=>(
+                            <div className="my-2 mx-auto max-w-1/2">
+                                <OrdersCard product={o}/>
+                            </div>
+                        ))
+                    }
                     </>
                     ) :
                     (<div><h1 className="text-center text-p"><span>No orders found. </span>
@@ -74,7 +86,6 @@ const UserDashboard = () => {
     }
 
     const Details = () => {
-        console.log("ORDERRRR : ",order)
         if(loading){
             return <div> <h1 className="text-center">Loading...</h1> </div>
         }else if(err){
@@ -100,6 +111,7 @@ const UserDashboard = () => {
         <Base title="UserDashboard page">
             <div className="">
             {Details()}
+            <hr className="mx-20"/>
             {OrderDetails()}
             </div>
         </Base>
