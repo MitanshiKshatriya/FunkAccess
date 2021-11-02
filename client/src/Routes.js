@@ -7,7 +7,7 @@ import AdminRoutes from './auth/helper/AdminRoutes'
 
 import Home from "./core/Home"
 import Cart from "./core/Cart"
-import Test from "./core/Test"
+import Test from "./core/Test1"
 import Signin from './user/Signin'
 import Signup from "./user/Signup"
 import Profile from "./user/Profile"

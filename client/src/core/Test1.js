@@ -4,8 +4,6 @@ import { ProductsGallery } from './DisplaySection'
 import { getProducts, getFilteredProducts } from './helper/coreapicalls'
 import { getCategories } from '../admin/helper/adminapicall'
 import { NotProductsFound } from './Test'
-import Pagination from './Pagination'
-import DisplayCard from './DisplayCard'
 
 const Shop = ({match}) => {
 
@@ -127,10 +125,10 @@ const Shop = ({match}) => {
         <div className="">
         <FilterOptions/>
         {  products && products.length>0 ?
-            <Pagination data={products} RenderComponent={DisplayCard} pageLimit={3} dataLimit={8}/>
+            <ProductsGallery products={products}/>
             :
             <NotProductsFound/>
-        } 
+        }
         </div>
         </Base>
     )
