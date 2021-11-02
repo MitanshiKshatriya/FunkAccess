@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+
 import Base from '../core/Base'
 
 import { isAuthenticated } from '../auth/helper/index'
@@ -37,7 +39,6 @@ const UserDashboard = () => {
         setLoading(true)
         if(user){
             if(user.name && user.email){
-                console.log("HERE")
                 // setUser({...user,email:u.email,name:u.name,userId:u._id})
             }else{
                 setErr(true)
@@ -51,14 +52,26 @@ const UserDashboard = () => {
         preloadOrder()
     }
 
-    const preload1 = () => {
-        // preloadUser()
-        
-    }
-
     useEffect(() => {
         preload()
     }, [])
+
+    const OrderDetails = () => {
+        return (
+        <div className="my-3">
+                {
+                    order.length > 0 ? (
+                    <>
+                    <h2 className='text-2xl'>Orders</h2>
+                    </>
+                    ) :
+                    (<div><h1 className="text-center text-p"><span>No orders found. </span>
+                    <Link to="/shop" className="font-bold text-sm text-pink-dark hover:text-pink-darker underline">Shop Now</Link>
+                    </h1></div>)
+                }
+                </div>
+        )
+    }
 
     const Details = () => {
         console.log("ORDERRRR : ",order)
@@ -87,6 +100,7 @@ const UserDashboard = () => {
         <Base title="UserDashboard page">
             <div className="">
             {Details()}
+            {OrderDetails()}
             </div>
         </Base>
     )

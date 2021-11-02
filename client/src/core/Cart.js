@@ -44,7 +44,7 @@ const Cart = () => {
         <div className="customCartInfo">
         {products.length > 0 ? 
         loadAllProducts(products) : 
-        <h3>Cart is empty.<Link>SHOP NOW!</Link></h3>
+        <h3 className="font-bold text-sm text-pink-dark hover:text-pink-darker underline">Cart is empty.<Link to="/shop">SHOP NOW!</Link></h3>
         }
         </div>
         <div className="customCartPayment">

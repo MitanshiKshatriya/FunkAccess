@@ -59,16 +59,27 @@ const updateUser = (req,res) => {
 
 const userPurchaseList = (req,res) => { 
 
-	Order.find({user: req.profile._id})
-	// .populate("user","_id name")
-	.exec((err,order)=>{
-		if(err || !order){
-			return res.status(400).json({
-				err: "No order in this account"
-			})
-		}
+	// Order.find({user: req.profile._id})
+	// // .populate("user","_id name")
+	// .exec((err,order)=>{
+	// 	if(err || !order){
+	// 		return res.status(400).json({
+	// 			err: "No order in this account"
+	// 		})
+	// 	}
 
-		return res.json(order);
+	// 	return res.json(order);
+	// })
+
+	User.findById(req.profile._id)
+	.exec((err,doc)=>{
+		if(err || !doc){
+				return res.status(400).json({
+						err: "No order in this account"
+					})
+				}
+		
+		return res.json(doc.purchases);
 	})
 
 
@@ -82,6 +93,7 @@ const pushOrderInPurchaseList = (req,res,next) => {
 		purchases.push({
 			_id: product._id,
 			name: product.name,
+			urlPhoto: product.urlPhoto,
 			descripton: product.description,
 			category: product.category,
 			quantity: product.quantity,
