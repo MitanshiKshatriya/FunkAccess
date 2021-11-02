@@ -221,7 +221,7 @@ exports.getAllProduct = (req,res) => {
 
 	Product.find(category)
 	.select("-photo")
-	.limit(limit)
+	// .limit(limit)
 	.sort([[sortBy, orderBy]])
 	.exec((err,products)=>{
 

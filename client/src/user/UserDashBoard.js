@@ -2,23 +2,43 @@ import React, { useState, useEffect } from 'react'
 import Base from '../core/Base'
 
 import { isAuthenticated } from '../auth/helper/index'
+import { getUserOrderDetails } from './helper/userapicalls'
 
 const UserDashboard = () => {
-    const [user,setUser] = useState({
-        name: '',
-        email: ''
-    })
-
+    // const [user,setUser] = useState({
+    //     name: '',
+    //     email: '',
+    //     userId: ''
+    // })
+    const [ order, setOrder ] = useState([])
     const [err, setErr] = useState(false)
     const [loading, setLoading] = useState(false)
 
+    const { token, user } = isAuthenticated()
+
+    const preloadOrder = () => {
+        setLoading(true)
+        getUserOrderDetails(user._id,token)
+        .then(data=>{
+            if(data.err){
+                setErr(data.err)
+            }else{
+            setOrder(data)
+            }
+            setLoading(false)
+        })
+        .catch(err=>{
+            setErr(err)
+            setLoading(false)
+        })
+    }
+
     const preload = () => {
         setLoading(true)
-        const u   = isAuthenticated().user
-        if(u){
-            if(u.name && u.email){
+        if(user){
+            if(user.name && user.email){
                 console.log("HERE")
-                setUser({...user,email:u.email,name:u.name})
+                // setUser({...user,email:u.email,name:u.name,userId:u._id})
             }else{
                 setErr(true)
             }
@@ -28,6 +48,12 @@ const UserDashboard = () => {
             setErr('Some error occured')
             setLoading(false)
         }
+        preloadOrder()
+    }
+
+    const preload1 = () => {
+        // preloadUser()
+        
     }
 
     useEffect(() => {
@@ -35,6 +61,7 @@ const UserDashboard = () => {
     }, [])
 
     const Details = () => {
+        console.log("ORDERRRR : ",order)
         if(loading){
             return <div> <h1 className="text-center">Loading...</h1> </div>
         }else if(err){

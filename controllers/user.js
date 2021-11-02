@@ -60,11 +60,11 @@ const updateUser = (req,res) => {
 const userPurchaseList = (req,res) => { 
 
 	Order.find({user: req.profile._id})
-	.populate("user","_id name")
+	// .populate("user","_id name")
 	.exec((err,order)=>{
 		if(err || !order){
 			return res.status(400).json({
-				error: "No order in this account"
+				err: "No order in this account"
 			})
 		}
 

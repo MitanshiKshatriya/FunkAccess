@@ -32,6 +32,8 @@ router.get("/order/admin/status/:userId",
 	isSignedIn, isAuthenticated, isAdmin,
 	getOrderStatus
 	)
+
+//update order status
 router.put("/order/admin/:orderId/status/:userId",
 	isSignedIn, isAuthenticated, isAdmin,
 	updateStatus
