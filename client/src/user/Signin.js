@@ -15,6 +15,8 @@ const SignIn = () => {
         didRedirect: false
     })
 
+    const setErr = (err) => {setValues({...values,err:err})}
+
     const { email, password, err, loading, didRedirect} = values;
     const { user } = isAuthenticated()
 
@@ -107,7 +109,7 @@ const SignIn = () => {
 
     return (
         <Base>
-        <Failure msg={err} bool={err}/>
+        <Failure msg={err} bool={err} setBool={setErr}/>
         {SignInForm()}
         {performRedirect()}
         {/* <p>{JSON.stringify(values)}</p> */}

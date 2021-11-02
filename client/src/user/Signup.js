@@ -16,6 +16,9 @@ const Signup = () => {
         success:false
     })
 
+    const setErr = (err) => {setValues({...values,err:err})}
+    const setSuccess = (success) => {setValues({...values,success:success})}
+
     const {name, email, password, err, success} = values;
 
     const handleChange = name => event => {
@@ -33,6 +36,7 @@ const Signup = () => {
             }
             else{
                 setValues({
+                  ...values,
                     name: "",
                     password: "",
                     err:"",
@@ -102,8 +106,8 @@ const Signup = () => {
 
     return (
         <Base>
-        <Success msg={`Account successfully created`} bool={success}/>
-        <Failure msg={err} bool={err}/>
+        <Success msg={`Account successfully created`} bool={success} setBool={setSuccess}/>
+        <Failure msg={err} bool={err} setBool={setErr}/>
         {SignupForm()}
         {/* <p>{JSON.stringify(values)}</p> */}
         </Base>
