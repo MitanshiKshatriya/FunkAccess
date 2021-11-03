@@ -4,15 +4,15 @@ const Pagination = ({ data, RenderComponent, pageLimit, dataLimit }) => {
     const [pages] = useState(Math.round(data.length / dataLimit));
     const [currentPage, setCurrentPage] = useState(1);
   
-    function goToNextPage() {
+    const goToNextPage = () => {
         setCurrentPage((page) => page + 1);
     }
   
-    function goToPreviousPage() {
+    const goToPreviousPage = () => {
         setCurrentPage((page) => page - 1);
     }
   
-    function changePage(event) {
+    const changePage = (event) => {
         const pageNumber = Number(event.target.textContent);
         setCurrentPage(pageNumber);
     }
